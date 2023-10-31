@@ -18,6 +18,6 @@ sudo apt-get install alloydb-cli
 ```
 sudo alloydb system-check
 mkdir foo
-sudo alloydb database-server install --data-dir=foo
+sudo alloydb database-server install --data-dir=/workspaces/alloydb/foo
 sudo alloydb database-server start
 ```
