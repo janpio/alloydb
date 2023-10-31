@@ -12,12 +12,10 @@ jobs:
     name: Run
     runs-on: ubuntu-latest
     steps:
-      - name: Uninstall Postgresl
+      - name: Remove Postgres user
         run: |
-          sudo apt-get --purge remove postgresql
-          dpkg -l | grep postgres
-          sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
-          dpkg -l | grep postgres
+          sudo userdel -r postgres
+
       - name: Install and run AlloyDB
         run: |
           curl https://europe-apt.pkg.dev/doc/repo-signing-key.gpg | sudo apt-key add -
