@@ -19,6 +19,7 @@ sudo apt-get install alloydb-cli
 sudo alloydb system-check
 mkdir foo
 sudo alloydb database-server install --data-dir=/workspaces/alloydb/foo
+sudo mount --make-shared /workspaces
 sudo alloydb database-server start
 ```
 
@@ -39,3 +40,5 @@ Image found locally: gcr.io/alloydb-omni/memory-agent:15.2.1
 Starting AlloyDB Omni containers...
 ERROR: error occurred while starting pg-service container: Error response from daemon: path /workspaces/alloydb/foo is mounted on /workspaces but it is not a shared mount
 ```
+
+Same commands seem to work on GitHub Actions with small additional (remove the existing Postgres user first), see .github/workflows/run.yml

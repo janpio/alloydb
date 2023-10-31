@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+      - '*.*.x'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  run:
+    name: Run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove existing Postgres user
+        run: |
+          sudo userdel -r postgres
+
+      - name: Install and run AlloyDB
+        run: |
+          curl https://europe-apt.pkg.dev/doc/repo-signing-key.gpg | sudo apt-key add -
+          sudo apt update
+          echo "deb https://europe-apt.pkg.dev/projects/alloydb-omni alloydb-omni-apt main" \
+            | sudo tee -a /etc/apt/sources.list.d/artifact-registry.list
+          sudo apt update
+          sudo apt-get install alloydb-cli
+          sudo alloydb system-check
+          mkdir foo
+          sudo alloydb database-server install --data-dir=/workspaces/alloydb/foo
+          sudo alloydb database-server start
