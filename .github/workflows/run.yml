@@ -12,7 +12,7 @@ jobs:
     name: Run
     runs-on: ubuntu-latest
     steps:
-      - name: Remove Postgres user
+      - name: Remove existing Postgres user
         run: |
           sudo userdel -r postgres
 
